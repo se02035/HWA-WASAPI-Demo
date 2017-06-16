@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resources">
+      <UniqueIdentifier>7dec3c87-5149-4c86-a4e5-a84fe6a344ba</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tga;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pch.cpp" />
+    <ClCompile Include="SamplePlayer.cpp" />
+    <ClCompile Include="Common.cpp" />
+    <ClCompile Include="DbgLog.cpp" />
+    <ClCompile Include="MFMediaSource.cpp" />
+    <ClCompile Include="MFTSample.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="SamplePlayer.h" />
+    <ClInclude Include="BasicTimer.h" />
+    <ClInclude Include="Common.h" />
+    <ClInclude Include="DbgLog.h" />
+    <ClInclude Include="IMediaSource.h" />
+    <ClInclude Include="MfMediaSource.h" />
+    <ClInclude Include="MFTSample.h" />
+    <ClInclude Include="SampleAudioEvents.h" />
+  </ItemGroup>
+</Project>
