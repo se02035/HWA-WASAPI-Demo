@@ -46,8 +46,19 @@ document.addEventListener("DOMContentLoaded", function (event) {
 function playMedia() {
     if (nativePlayer) {
         nativePlayer.initialize();
+
         systemMediaControls.isEnabled = true;
         systemMediaControls.playbackStatus = Windows.Media.MediaPlaybackStatus.playing;
+
+        // update the SMTC 
+        var updater = systemMediaControls.displayUpdater;
+        updater.type = Windows.Media.MediaPlaybackType.music;
+        updater.musicProperties.artist = "Dummy Artist";
+        updater.musicProperties.albumArtist = "Dummy Album Artist";
+        updater.musicProperties.title = "Dummy title";
+        updater.thumbnail = Windows.Storage.Streams.RandomAccessStreamReference.createFromUri(new Windows.Foundation.Uri('ms-appx:///artwork/artwork_198x192.jpg'));
+
+        updater.update();
     }
 }
 

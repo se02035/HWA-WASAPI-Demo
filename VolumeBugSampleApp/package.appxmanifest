@@ -14,7 +14,7 @@
     <Resource Language="x-generate" />
   </Resources>
   <Applications>
-    <Application Id="App" StartPage="https://volumebugsampleweb-njipdxgaxb.now.sh">
+    <Application Id="App" StartPage="http://localhost:12299/">
       <uap:ApplicationContentUriRules>
         <uap:Rule Match="http://localhost:12299" Type="include" WindowsRuntimeAccess="all" />
       </uap:ApplicationContentUriRules>

@@ -62,6 +62,7 @@
     <AppxManifest Include="package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <Content Include="artwork\artwork_198x192.jpg" />
     <Content Include="msapp-error.js" />
     <Content Include="msapp-error.css" />
     <Content Include="msapp-error.html" />
