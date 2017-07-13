@@ -241,8 +241,7 @@ ModelManifest.xml
 # FAKE - F# Make
 .fake/
 /VolumeBugSampleWeb/App_Data/PublishProfiles
-/VolumeBugSampleWeb/App_Data/PublishProfiles
 *.pubxml
-*.pubxml
-/VolumeBugSampleWeb/App_Data/PublishProfiles/classicsounds - Web Deploy.pubxml
-*.pubxml
+/VolumeBugSampleApp/Package.StoreAssociation.xml
+*.appx
+/VolumeBugSampleApp/_pkginfo.txt
