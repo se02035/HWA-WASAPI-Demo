@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3" IgnorableNamespaces="uap mp uap3">
-  <Identity Name="aa53e628-fa95-42a1-8d09-66e09e0eb48b" Version="1.0.7.0" Publisher="CN=oliverli" />
+  <Identity Name="aa53e628-fa95-42a1-8d09-66e09e0eb48b" Version="1.0.0.0" Publisher="CN=oliverli" />
   <mp:PhoneIdentity PhoneProductId="aa53e628-fa95-42a1-8d09-66e09e0eb48b" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>VolumeBugSampleApp</DisplayName>
+    <DisplayName>Classic Sounds - Beta</DisplayName>
     <PublisherDisplayName>oliverli</PublisherDisplayName>
     <Logo>images\storelogo.png</Logo>
   </Properties>
@@ -14,14 +14,19 @@
     <Resource Language="x-generate" />
   </Resources>
   <Applications>
-    <Application Id="App" StartPage="http://localhost:12299/">
+    <Application Id="App" StartPage="http://classicsounds.azurewebsites.net/">
       <uap:ApplicationContentUriRules>
-        <uap:Rule Match="http://localhost:12299" Type="include" WindowsRuntimeAccess="all" />
+        <uap:Rule Match="http://classicsounds.azurewebsites.net/" Type="include" WindowsRuntimeAccess="all" />
       </uap:ApplicationContentUriRules>
-      <uap:VisualElements DisplayName="VolumeBugSampleApp" Description="VolumeBugSampleApp" BackgroundColor="transparent" Square150x150Logo="images\Square150x150Logo.png" Square44x44Logo="images\Square44x44Logo.png">
-        <uap:DefaultTile Wide310x150Logo="images\Wide310x150Logo.png">
+      <uap:VisualElements DisplayName="Classic Sounds - Beta" Description="This app provides an easy way to listen to classic music. . The app is still a beta version that will evolve over time" BackgroundColor="transparent" Square150x150Logo="images\Square150x150Logo.png" Square44x44Logo="images\Square44x44Logo.png">
+        <uap:DefaultTile Wide310x150Logo="images\Wide310x150Logo.png" ShortName="Classic Sounds (Beta)" Square310x310Logo="images\LargeTile.png" Square71x71Logo="images\SmallTile.png">
+          <uap:ShowNameOnTiles>
+            <uap:ShowOn Tile="square150x150Logo" />
+            <uap:ShowOn Tile="wide310x150Logo" />
+            <uap:ShowOn Tile="square310x310Logo" />
+          </uap:ShowNameOnTiles>
         </uap:DefaultTile>
-        <uap:SplashScreen Image="images\splashscreen.png" />
+        <uap:SplashScreen Image="images\splashscreen.png" BackgroundColor="transparent" />
       </uap:VisualElements>
     </Application>
   </Applications>
