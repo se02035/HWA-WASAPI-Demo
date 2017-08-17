@@ -358,7 +358,7 @@ void CMFTSample::InitializeAudioRender()
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void CMFTSample::Initialize(const wchar_t *pInputStream)
+void CMFTSample::Initialize(LPCWSTR pInputStream)
 {
     ComPtr<IMFMediaType> spMediaType;
     ComPtr<IMFMediaType> spAudioMediaType;
@@ -371,7 +371,7 @@ void CMFTSample::Initialize(const wchar_t *pInputStream)
 
     InitializeCriticalSectionEx(&m_cs, 0, 0);
 
-	const wchar_t *newInput = L"http://www.hochmuth.com/mp3/Beethoven_12_Variation.mp3";
+	//const wchar_t *newInput = L"http://www.hochmuth.com/mp3/Beethoven_12_Variation.mp3";
     // create a media source to get mediatype and read sample from. in the sample I am using implemented 
     // the interface using MF media source, app can provide their own IMediaSource interface if needed.
 

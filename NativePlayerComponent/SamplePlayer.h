@@ -9,7 +9,7 @@ namespace NativePlayerComponent
     {
     public:
         SamplePlayer();
-		void Initialize();
+		void Initialize(Platform::String^ pInputStream);
 		void Shutdown();
 
 		void VolumeIncrease();

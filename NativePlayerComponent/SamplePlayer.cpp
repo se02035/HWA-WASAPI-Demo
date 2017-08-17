@@ -20,10 +20,10 @@ SamplePlayer::SamplePlayer()
 	//Initialize();
 }
 
-void SamplePlayer::Initialize()
+void SamplePlayer::Initialize(Platform::String^ pInputStream)
 {
 	InitDxSampleFileLog();
-	m_MFTSample.Initialize(L"http://www.hochmuth.com/mp3/Beethoven_12_Variation.mp3");
+	m_MFTSample.Initialize(pInputStream->Data());
 	m_fPipelineSetup = true;
 	m_timer = ref new BasicTimer();
 	return;

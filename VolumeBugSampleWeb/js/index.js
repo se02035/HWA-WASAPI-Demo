@@ -1,6 +1,7 @@
 ﻿
 var nativePlayer;
 var systemMediaControls;
+var loadedUrl
 
 document.addEventListener("DOMContentLoaded", function (event) {
 
@@ -17,8 +18,13 @@ document.addEventListener("DOMContentLoaded", function (event) {
         //var result = HelperComponent.Helper.convertToString(bytes);
     }
 
+    document.getElementById('btnLoad').addEventListener('click', function () {
+        loadedUrl = $('#txtUrl').val();
+        playback_controls.enable();
+    });
+
     document.getElementById('btnPlay').addEventListener('click', function () {
-        playMedia();
+        playMedia(loadedUrl);
     });
 
     document.getElementById('btnStop').addEventListener('click', function () {
@@ -34,62 +40,115 @@ document.addEventListener("DOMContentLoaded", function (event) {
     });
 
     document.getElementById('btnMute').addEventListener('click', function () {
-        mute();
-    });
-
-    document.getElementById('btnUnmute').addEventListener('click', function () {
-        unmute();
+        var shallMute = !$('#btnMute').hasClass('active')
+        if (shallMute)
+            mute();
+        else
+            unmute();
     });
 
 });
 
-function playMedia() {
+function playMedia(url) {
     if (nativePlayer) {
-        nativePlayer.initialize();
+        try {
+            nativePlayer.initialize(url);
 
-        systemMediaControls.isEnabled = true;
-        systemMediaControls.playbackStatus = Windows.Media.MediaPlaybackStatus.playing;
+            // update the ui - buttons and progress bar
+            $('#btnPlay').prop('disabled', true);
+            $('#btnStop').prop('disabled', false);
+            $('#btnVolInc').prop('disabled', false);
+            $('#btnVolDec').prop('disabled', false);
+            $('#btnMute').prop('disabled', false);
+            $('#progressbar').css('width', '100%');
 
-        // update the SMTC 
-        var updater = systemMediaControls.displayUpdater;
-        updater.type = Windows.Media.MediaPlaybackType.music;
-        updater.musicProperties.artist = "Dummy Artist";
-        updater.musicProperties.albumArtist = "Dummy Album Artist";
-        updater.musicProperties.title = "Dummy title";
-        updater.thumbnail = Windows.Storage.Streams.RandomAccessStreamReference.createFromUri(new Windows.Foundation.Uri('ms-appx:///artwork/artwork_198x192.jpg'));
+            systemMediaControls.isEnabled = true;
+            systemMediaControls.playbackStatus = Windows.Media.MediaPlaybackStatus.playing;
 
-        updater.update();
+            // update the SMTC 
+            var updater = systemMediaControls.displayUpdater;
+            updater.type = Windows.Media.MediaPlaybackType.music;
+            updater.musicProperties.artist = "Dummy Artist";
+            updater.musicProperties.albumArtist = "Dummy Album Artist";
+            updater.musicProperties.title = "Dummy title";
+            updater.thumbnail = Windows.Storage.Streams.RandomAccessStreamReference.createFromUri(new Windows.Foundation.Uri('ms-appx:///artwork/artwork_198x192.jpg'));
+
+            updater.update();
+        }
+        catch (err) {
+            bootstrap_alert.warning(err.message);
+            playback_controls.disable();
+        }
     }
 }
 
 function stopMedia() {
     if (nativePlayer) {
-        nativePlayer.shutdown();
-        systemMediaControls.playbackStatus = Windows.Media.MediaPlaybackStatus.closed;
+        try {
+            // update the ui - buttons and progress bar
+            $('#btnStop').prop('disabled', true);
+            $('#btnVolInc').prop('disabled', true);
+            $('#btnVolDec').prop('disabled', true);
+            $('#btnMute').prop('disabled', true);
+            $('#btnPlay').prop('disabled', false);
+
+            $('#progressbar').css('width', '0%');
+
+            // in case it is muted unmute it....
+            nativePlayer.unmute();
+            nativePlayer.shutdown();
+
+            systemMediaControls.playbackStatus = Windows.Media.MediaPlaybackStatus.closed;
+        }
+        catch (err) {
+            bootstrap_alert.warning(err.message);
+            playback_controls.disable();
+        }
     }
 }
 
 function increaseVolume() {
     if (nativePlayer) {
-        nativePlayer.volumeIncrease();
+        try {
+            nativePlayer.volumeIncrease();
+        }
+        catch (err) {
+            bootstrap_alert.warning(err.message);
+        }
+
     }
 }
 
 function decreaseVolume() {
     if (nativePlayer) {
-        nativePlayer.volumeDecrease();
+        try {
+            nativePlayer.volumeDecrease();
+        }
+        catch (err) {
+            bootstrap_alert.warning(err.message);
+        }
     }
 }
 
 function mute() {
     if (nativePlayer) {
-        nativePlayer.mute();
+        try {
+            nativePlayer.mute();
+        }
+        catch (err) {
+            bootstrap_alert.warning(err.message);
+        }
     }
 }
 
 function unmute() {
     if (nativePlayer) {
-        nativePlayer.unmute();
+        try {
+            nativePlayer.unmute();
+        }
+        catch (err) {
+            bootstrap_alert.warning(err.message);
+        }
     }
 }
 
@@ -113,7 +172,7 @@ function setupSystemMediaTransportControls() {
 function systemMediaControlsButtonPressed(args) {
     switch (args.button) {
         case Windows.Media.SystemMediaTransportControlsButton.play:
-            playMedia();
+            playMedia(loadedUrl);
             break;
         case Windows.Media.SystemMediaTransportControlsButton.pause:
             stopMedia();
@@ -136,4 +195,19 @@ function systemMediaControlsPlaybackPositionChangeRequested() {
 
 function systemMediaControlsAutoRepeatModeChangeRequested() {
 
+}
+
+bootstrap_alert = function () { }
+bootstrap_alert.warning = function (message) {
+    $('#alert_placeholder').html('<div class="alert alert-warning alert-dismissible fade show" role="alert"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><span>Error: ' + message + '</span></div>')
+}
+
+playback_controls = function () { }
+playback_controls.enable = function () {
+    $('#controlPanel').removeClass('d-none');
+    $('#btnPlay').prop('disabled', false);
+}
+playback_controls.disable = function () {
+    $('#controlPanel').addClass('d-none');
+    $('#btnPlay').prop('disabled', true);
 }

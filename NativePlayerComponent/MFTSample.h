@@ -51,7 +51,7 @@ class CMFTSample : public AudioClock
 {
 public:
     CMFTSample();
-    void Initialize(const wchar_t *pInputStream);
+    void Initialize(LPCWSTR pInputStream);
     void ShutDown();
     ~CMFTSample();
     BOOL ProcessStream(eStreamType streamType);
